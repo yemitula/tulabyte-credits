@@ -22,13 +22,13 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <img class="mt-5" src="https://i.ibb.co/Vppy1wv/logo-credits.png" width="150">
-        <p class="lead mt-5">This Website/Application was Built by </p>
-        <h1 class="">Yemi Adetula & the Tulabyte Team</h1>
-        <p>For more information:</p>
+        <p class="lead mt-5" main-label>This Website/Application was Built by </p>
+        <h1 class="" builders>Yemi Adetula & the Tulabyte Team</h1>
+        <p more-label>For more information:</p>
         <ul class="list-unstyled">
-          <li><a href="https://tulabyte.net">tulabyte.net</a></li>
-          <li><a href="mailto:info@tulabyte.net">info@tulabyte.net</a> / <a href="mailto:yemi@tulabyte.net">yemi@tulabyte.net</a></li>
-          <li><a href="tel:+2348055811697">+234 805 581 1697</a></li>
+          <li><a href="https://tulabyte.net" website>tulabyte.net</a></li>
+          <li><a href="mailto:info@tulabyte.net" email1>info@tulabyte.net</a> / <a href="mailto:yemi@tulabyte.net" email2>yemi@tulabyte.net</a></li>
+          <li><a href="tel:+2348055811697" phone>+234 805 581 1697</a></li>
         </ul>
       </div>
     </div>
@@ -39,7 +39,55 @@
   src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+  "use strict";
+
+  let info = {
+    "mainLabel": "This Website/Application was developed by",
+    "builders": "Yemi Adetula & the Tulabyte Team",
+    "moreLabel": "For more information, contact us:",
+    "website": "tulabyte.net",
+    "email1": "info@tulabyte.net",
+    "email2": "yemi@tulabyte.net",
+    "phone": "+2348055811697"
+  };
+
+  const setInfo = (info) => {
+    console.log("TCL: setInfo -> info", info);
+
+    document.querySelector("title").textContent = info.mainLabel + ' ' + info.builders;
+    document.querySelector("[main-label]").textContent = info.mainLabel;
+    document.querySelector("[builders]").textContent = info.builders;
+    document.querySelector("[more-label]").textContent = info.moreLabel;
+    document.querySelector("[website]").textContent = info.website;
+    document.querySelector("[email1]").textContent = info.email1;
+    document.querySelector("[email1]").setAttribute('href', 'mailto:'+info.email1);
+    document.querySelector("[email2]").textContent = info.email2;
+    document.querySelector("[email2]").setAttribute('href', 'mailto:'+info.email2);
+    document.querySelector("[phone]").textContent = info.phone;
+    document.querySelector("[phone]").setAttribute('href', 'tel:'+info.phone);
+  }
+
+  const fetchInfo = () => {
+    const api = 'https://tulabyte.net/credits/info.json';
+    fetch(api)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('fetch response.json.data', data);
+        if (data && data.builders && data.builders !== '') {
+          setInfo(data);
+        }
+      })
+      .catch((err) => {
+        console.log("fetch error: ", err);
+      });
+  }
+
+  setInfo(info);
+  fetchInfo();
+
+</script>
 
 </body>
 
